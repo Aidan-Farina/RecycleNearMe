@@ -3,7 +3,6 @@ import { Form, Button, Alert } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
-import OAuthLogin from "./OAuthLogin";
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
@@ -91,7 +90,6 @@ const LoginForm = () => {
           Submit
         </Button>
         <h5 className="mt-3 mb-2 text-center">Or login with:</h5>
-        <OAuthLogin />
       </Form>
     </>
   );

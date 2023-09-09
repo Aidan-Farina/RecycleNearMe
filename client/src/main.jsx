@@ -1,32 +1,31 @@
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom/dist";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './App.jsx';
-import Home from './pages/Home';
-import Matchup from './pages/Matchup';
-import Vote from './pages/Vote';
-import NotFound from './pages/NotFound';
+import App from "./App.jsx";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Error from "./pages/error/index.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    error: <Error />,
     children: [
       {
         index: true,
-        element: <Home />
-      }, {
-        path: '/matchup',
-        element: <Matchup />
-      }, {
-        path: '/matchup/:id',
-        element: <Vote />
+        element: <Home />,
       },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+  
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
