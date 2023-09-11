@@ -26,8 +26,26 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.pre('save', async function(next) {
+  if (this.isModified('password')) {
+    try {
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(this.password, salt);
+      next();
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    next();
+  }
+});
+
 userSchema.methods.isCorrectPassword = async function(password) {
-  return await bcrypt.compare(password, this.password);
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (err) {
+    throw new Error('Failed to compare password');
+  }
 };
 
 const User = mongoose.model('User', userSchema);

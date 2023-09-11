@@ -18,7 +18,6 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -27,15 +26,18 @@ const SignupForm = () => {
 
     try {
       const { data } = await addUser({
-          variables: { ...userFormData }
+        variables: { ...userFormData },
       });
-      Auth.login(data.addUser.token);
+      if (data && data.createUser && data.createUser.token) {
+        Auth.login(data.createUser.token);
+      } else {
+        console.error("No token returned from addUser mutation");
+      }
       setShowAlert(false);
-  } catch(err) {
+    } catch (err) {
       console.error(err);
       setShowAlert(true);
-  }
-  
+    }
     setUserFormData({
       username: '',
       email: '',
@@ -46,9 +48,14 @@ const SignupForm = () => {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>
+      <Alert
+  dismissible
+  onClose={() => setShowAlert(false)}
+  show={showAlert !== false}
+  variant="danger"
+>
+  {showAlert}
+</Alert>
 
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='username'>Username</Form.Label>

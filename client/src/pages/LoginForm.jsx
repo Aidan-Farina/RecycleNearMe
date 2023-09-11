@@ -28,10 +28,15 @@ const LoginForm = () => {
       const { data } = await login({
         variables: { ...userFormData },
       });
-      Auth.login(data.login.token);
-      setShowAlert(false);
+      if (data && data.loginUser && data.loginUser.token) {
+        Auth.login(data.loginUser.token);
+        setShowAlert(false);
+      } else {
+        console.error("No token returned from login mutation");
+        setShowAlert(true);
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Error Details:", err);
       setShowAlert(true);
     }
 
@@ -48,10 +53,10 @@ const LoginForm = () => {
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
-          show={showAlert}
+          show={showAlert !== false}
           variant="danger"
         >
-          Something went wrong with your login credentials!
+          {showAlert}
         </Alert>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="email">Email</Form.Label>
@@ -89,7 +94,6 @@ const LoginForm = () => {
         >
           Submit
         </Button>
-        <h5 className="mt-3 mb-2 text-center">Or login with:</h5>
       </Form>
     </>
   );
