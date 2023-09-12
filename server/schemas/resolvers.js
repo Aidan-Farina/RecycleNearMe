@@ -28,9 +28,20 @@ const resolvers = {
   Mutation: {
     // Create a new user
     createUser: async (_, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+      try {
+        const user = await User.create({ username, email, password });
+        const token = signToken(user);
+        
+        if (!token) {
+          console.error("Token not generated");
+          return null;
+        }
+    
+        return { token, user };
+      } catch (error) {
+        console.error("Error in createUser:", error);
+        return null;
+      }
     },
     // Login and return a token
     loginUser: async (_, { email, password }) => {
