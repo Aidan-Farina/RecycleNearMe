@@ -6,7 +6,7 @@ const Home = () => {
     <div className="container-fluid" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF' }}>
       <div className="card" style={{ width: '80%', backgroundColor: '#FFFFFF', borderColor: '#333333' }}>
         <div className="text-center" style={{ color: '#333333' }}>
-          <h1>Welcome to the Recycling Locator!</h1>
+          <h1>Wondering where to recycle?</h1>
         </div>
         <div className="card-body text-center" style={{ color: '#333333' }}>
           <h2>Welcome to our community of eco-conscious individuals!</h2>
