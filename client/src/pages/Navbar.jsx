@@ -24,7 +24,7 @@ const AppNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            {isLoggedIn ? (  // <-- Use isLoggedIn here
+            {isLoggedIn ? (
               <>
                 <Nav.Link href="/profile" style={{ color: '#333333' }}>Profile</Nav.Link>
                 <Nav.Link onClick={handleLogout} style={{ color: '#333333' }}>Logout</Nav.Link>
