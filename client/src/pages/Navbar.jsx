@@ -3,21 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Modal, Button } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
-import Auth from "../utils/auth";
 import { useAuth } from '../context/AuthContext';
 
 const AppNavbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
-  const { authUser, setAuthUser } = useAuth();
+  const { authUser, setAuthUser, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
-  const user = authUser;
-
   const handleLogout = () => {
-    Auth.logout();
-    setAuthUser(null);
+    logout();
     navigate('/');
   };
 
@@ -28,7 +24,7 @@ const AppNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            {user ? (
+            {isLoggedIn ? (  // <-- Use isLoggedIn here
               <>
                 <Nav.Link href="/profile" style={{ color: '#333333' }}>Profile</Nav.Link>
                 <Nav.Link onClick={handleLogout} style={{ color: '#333333' }}>Logout</Nav.Link>
