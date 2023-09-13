@@ -6,16 +6,23 @@ const locationSchema = new Schema({
     required: true,
     unique: true,
   },
-    address: {
+  address: {
     type: String,
     required: true,
     unique: true,
   },
-  name: {
-    type: String,
+  latitude: {
+    type: Number,
     required: true,
-    unique: true,
   },
+  longitude: {
+    type: Number,
+    required: true,
+  },
+  type_of_recycling: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Tag',
+  }],
 });
 
 const Location = model('Location', locationSchema);
