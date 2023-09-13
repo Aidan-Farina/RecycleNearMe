@@ -1,13 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER_BY_ID = gql`
-  query getUserById($id: ID!) {
-    getUserById(id: $id) {
-      _id
-      username
-      email
-    }
+query GetUser($getUserId: ID!) {
+  getUser(id: $getUserId) {
+    _id
+    email
+    password
+    username
   }
+}
 `;
 
 export const QUERY_USER_BY_USERNAME = gql`
