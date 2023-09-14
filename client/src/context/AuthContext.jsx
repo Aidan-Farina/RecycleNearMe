@@ -1,56 +1,43 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import AuthService from '../utils/auth'; 
+import AuthService from '../utils/auth';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profile, setProfile] = useState(null); // Placeholder for future profile data
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Initialize isLoggedIn if a token exists
-    const loggedIn = AuthService.loggedIn();
-    setIsLoggedIn(loggedIn);
-
-    // If profiles are implemented, you can initialize it here
-    if (loggedIn) {
-      const userProfile = AuthService.getProfile();
-      setProfile(userProfile);
+    const token = AuthService.getToken();
+    if (token) {
+      const userData = AuthService.getProfile();
+      setCurrentUser(userData);
+      setIsLoggedIn(true);
     }
   }, []);
 
   const login = (token) => {
     AuthService.login(token);
+    const userData = AuthService.getProfile();
+    console.log(userData);
+    setCurrentUser(userData);
     setIsLoggedIn(true);
-
-    // If profiles are implemented, you can set it here
-    const userProfile = AuthService.getProfile();
-    setProfile(userProfile);
   };
 
   const logout = () => {
     AuthService.logout();
+    setCurrentUser(null);
     setIsLoggedIn(false);
-    setProfile(null); // Clear the profile
   };
 
   const value = {
     isLoggedIn,
-    profile, // Placeholder for future profile data
+    currentUser,
     login,
     logout,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
-
-

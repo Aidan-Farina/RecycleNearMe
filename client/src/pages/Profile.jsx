@@ -1,17 +1,24 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER_BY_ID } from '../utils/queries';
-import { AuthContext } from '../context/AuthContext'; // Import your AuthContext
+import { useAuth } from '../context/AuthContext';
 
 const Profile = () => {
-  const { user } = useContext(AuthContext); // Get the user from AuthContext
-  const userId = user?.id; // Get the user ID from the user object
+  const { profile, isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+  const userId = profile?.id;
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/'); // Redirect to login page if not logged in
+    }
+  }, [isLoggedIn, navigate]);
 
   const { loading, error, data } = useQuery(QUERY_USER_BY_ID, {
     variables: { id: userId },
     fetchPolicy: "no-cache",
-    skip: !userId, // Skip the query if userId is not available
+    skip: !userId,
   });
 
   if (loading) return <div>Loading...</div>;
@@ -30,12 +37,8 @@ const Profile = () => {
       </div>
       <div className="card-footer text-center m-3">
         <h2>What would you like to do?</h2>
-        <Link to="/saved-locations">
-          <button className="btn btn-lg btn-primary m-2">View Saved Locations</button>
-        </Link>
-        <Link to="/my-reviews">
-          <button className="btn btn-lg btn-secondary m-2">View My Reviews</button>
-        </Link>
+        <button className="btn btn-lg btn-primary m-2">View Saved Locations</button>
+        <button className="btn btn-lg btn-secondary m-2">View My Reviews</button>
       </div>
     </div>
   );
