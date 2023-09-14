@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from "./App.jsx";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/Profile.jsx";
 import Error from "./pages/error/index.jsx";
+import { AuthProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -21,11 +22,12 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
-  
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  
+    <RouterProvider router={router} />
+  
 );

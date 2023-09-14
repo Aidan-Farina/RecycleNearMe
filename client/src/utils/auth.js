@@ -5,12 +5,15 @@ const TOKEN_KEY = 'id_token';
 class AuthService {
   getProfile() {
     const token = this.getToken();
+    console.log("Retrieved token:", token);
     if (!token) {
+      console.log("No token found");
       return null;
     }
 
     try {
       const profile = decode(token);
+      console.log("Decoded profile:", profile);
       return profile;
     } catch (error) {
       console.error('Error decoding token:', error);

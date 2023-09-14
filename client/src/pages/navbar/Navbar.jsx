@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Modal, Button } from "react-bootstrap";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import { useAuth } from '../context/AuthContext';
+import LoginForm from "../LoginForm";
+import SignupForm from "../SignupForm";
+import { useAuth } from '../../context/AuthContext';
+import './navbar.css';
+import '../index.css';
 
 const AppNavbar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,27 +20,35 @@ const AppNavbar = () => {
   };
 
   return (
-    <>
-      <Navbar style={{ width: '100%', backgroundColor: '#50C878', borderBottom: '2px solid #333333' }}>
-        <Navbar.Brand href="/" style={{ color: '#FFFFFF' }}>Recycling Locator</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            {isLoggedIn ? (
-              <>
-                <Nav.Link href="/profile" style={{ color: '#333333' }}>Profile</Nav.Link>
-                <Nav.Link onClick={handleLogout} style={{ color: '#333333' }}>Logout</Nav.Link>
-              </>
-            ) : (
-              <Nav.Link onClick={() => setShowModal(true)} style={{ color: '#FFFFFF' }}>Login/Sign Up</Nav.Link>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-
+    <Navbar expand="lg" className="fixed-navbar">
+      <Navbar.Brand as={Link} to="/" style={{ color: '#50C878', fontSize: '24px', fontWeight: 'bold' }}>
+        Recycling Locator
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          {isLoggedIn ? (
+            <>
+              <Nav.Link as={Link} to="/profile" style={{ color: '#333333' }}>Profile</Nav.Link>
+              <Nav.Link onClick={handleLogout} style={{ color: '#333333' }}>Logout</Nav.Link>
+            </>
+          ) : (
+            <Nav.Link
+              onClick={() => setShowModal(true)}
+              style={{
+                color: '#50C878',
+                fontWeight: 'bold',
+                transition: 'color 0.2s', // Add smooth transition
+              }}
+            >
+              Login/Sign Up
+            </Nav.Link>
+          )}
+        </Nav>
+      </Navbar.Collapse>
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)} aria-labelledby="login-modal">
         <Modal.Header closeButton>
-          <Modal.Title id="login-modal">
+          <Modal.Title id="login-modal" className="text-center">
             {showSignup ? "Sign Up" : "Login"}
           </Modal.Title>
         </Modal.Header>
@@ -61,7 +71,7 @@ const AppNavbar = () => {
           )}
         </Modal.Footer>
       </Modal>
-    </>
+    </Navbar>
   );
 };
 

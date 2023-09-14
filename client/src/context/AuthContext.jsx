@@ -11,10 +11,15 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = AuthService.getToken();
+    console.log("Token in AuthProvider:", token); // Debugging line
+
     if (token) {
       const userData = AuthService.getProfile();
+      console.log("User data in AuthProvider:", userData); // Debugging line
       setCurrentUser(userData);
       setIsLoggedIn(true);
+    } else {
+      console.log("No token found"); // Debugging line
     }
   }, []);
 

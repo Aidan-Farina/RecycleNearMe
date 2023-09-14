@@ -1,0 +1,38 @@
+/* navbar.css */
+.fixed-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Adjust the z-index as needed */
+    background-color: #f9f9f9;
+  }
+ /* Remove the underline specifically from the "Recycling Locator" text */
+.fixed-navbar .navbar-brand:hover {
+    text-decoration: none; /* Remove the underline */
+  }
+  
+  /* Style the "Recycling Locator" text on hover */
+  .fixed-navbar .navbar-brand:hover {
+    background-color: #a8d2b6; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+    padding: 5px 25px; /* Padding for a more pronounced hover effect */
+    border-radius: 5px; /* Rounded corners for a nice look */
+    transition: background-color 0.6s ease, color 0.6s ease; /* Smooth transition */
+  }
+  
+  /* Remove the underline and style the navbar links on hover */
+  .fixed-navbar .nav-link {
+    text-decoration: none; /* Remove the underline */
+  }
+  
+  .fixed-navbar .nav-link:hover {
+    color: #fff; /* Change the text color on hover */
+    background-color: #50C878; /* Change the background color on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  }
+
+  .fixed-navbar .navbar-brand {
+    padding-left: 20px; /* Adjust as needed to move the logo away from the side */
+    padding-right: 20px; /* Adjust as needed to move the logo away from the side */
+  }

@@ -12,6 +12,10 @@
   /* 2 */
 }
 
+.content-below-navbar {
+  margin-top: 70px; /* Adjust the margin-top value to match the navbar height */
+}
+
 /* Sections
    ========================================================================== */
 /**

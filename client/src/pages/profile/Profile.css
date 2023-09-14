@@ -1,0 +1,39 @@
+/* CSS file or style tag */
+.profile-container {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-header {
+    background-color: #50C878;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .profile-body {
+    padding: 20px;
+  }
+  
+  .profile-footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
