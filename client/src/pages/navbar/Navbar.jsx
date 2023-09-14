@@ -4,7 +4,7 @@ import { Navbar, Nav, Modal, Button } from "react-bootstrap";
 import LoginForm from "../LoginForm";
 import SignupForm from "../SignupForm";
 import { useAuth } from '../../context/AuthContext';
-import './navbar.css';
+import './Navbar.css';
 import '../index.css';
 
 const AppNavbar = () => {
