@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile.jsx";
 import Error from "./pages/error/index.jsx";
-import { AuthProvider } from "./context/AuthContext";
+import AddLocation from "./pages/AddLocation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/AddLocation",
+        element: <AddLocation />,
       },
     ],
   },

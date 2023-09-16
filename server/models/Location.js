@@ -19,6 +19,9 @@ const locationSchema = new Schema({
     type: Number,
     required: true,
   },
+  Description: {
+    type: String,
+  },
   type_of_recycling: [{
     type: Schema.Types.ObjectId,
     ref: 'Tag',

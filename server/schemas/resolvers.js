@@ -24,6 +24,41 @@ const resolvers = {
       }
       return user;
     },
+    getLocations: async (parent, args) => {
+      try {
+        const { name, skip, limit, sortBy } = args;
+    
+        // Define a base query
+        const query = {};
+    
+        // Apply filters based on arguments
+        if (name) {
+          query.name = { $regex: name, $options: 'i' };
+        }
+    
+        // Create a MongoDB query and apply sorting, pagination
+        const locationsQuery = Location.find(query);
+    
+        if (sortBy) {
+          locationsQuery.sort(sortBy); // 'sortBy' can be an object like { createdAt: -1 } for descending order
+        }
+    
+        if (skip) {
+          locationsQuery.skip(skip);
+        }
+    
+        if (limit) {
+          locationsQuery.limit(limit);
+        }
+    
+        const locations = await locationsQuery.exec();
+    
+        return locations;
+      } catch (error) {
+        throw new Error('Error fetching locations: ' + error);
+      }
+    },
+    
   },
   Mutation: {
     // Create a new user
@@ -68,6 +103,11 @@ const resolvers = {
       }
       throw createAuthenticationError();
     },
+    addLocation: async (parent, args, context) => {
+      const location = new Location(args);
+      await location.save();
+      return location;
+    }
   },
 };
 

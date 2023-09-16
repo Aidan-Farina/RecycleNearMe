@@ -31,3 +31,15 @@ export const QUERY_ALL_USERS = gql`
   }
 `;
 
+export const QUERY_LOCATIONS = gql`
+query GetLocations($name: String, $skip: Int, $limit: Int, $sortBy: LocationSortInput) {
+  getLocations(name: $name, skip: $skip, limit: $limit, sortBy: $sortBy) {
+    _id
+    name
+    latitude
+    longitude
+    description
+  }
+}
+`
+

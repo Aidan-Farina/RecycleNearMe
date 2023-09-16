@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link
 import { useQuery } from '@apollo/client';
 import { QUERY_USER_BY_ID } from '../../utils/queries';
 import { useAuth } from '../../context/AuthContext';
@@ -38,7 +38,10 @@ const Profile = () => {
       </div>
       <div className="profile-footer">
         <h2 className="header">What would you like to do?</h2>
-        <button className="btn btn-primary">View Saved Locations</button>
+        <Link to="/AddLocation">
+          <button className="btn btn-primary">Add Location</button>
+        </Link>
+        <button className="btn btn-secondary">View Saved Locations</button>
         <button className="btn btn-secondary">View My Reviews</button>
       </div>
     </div>

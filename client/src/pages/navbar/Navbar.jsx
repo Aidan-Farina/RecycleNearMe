@@ -22,7 +22,7 @@ const AppNavbar = () => {
   return (
     <Navbar expand="lg" className="fixed-navbar">
       <Navbar.Brand as={Link} to="/" style={{ color: '#50C878', fontSize: '24px', fontWeight: 'bold' }}>
-        Recycling Locator
+        RecycleMe
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -38,7 +38,7 @@ const AppNavbar = () => {
               style={{
                 color: '#50C878',
                 fontWeight: 'bold',
-                transition: 'color 0.2s', // Add smooth transition
+                transition: 'color 0.2s',
               }}
             >
               Login/Sign Up
