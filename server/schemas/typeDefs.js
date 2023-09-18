@@ -6,12 +6,19 @@ type User {
   password: String
 }
 
+type Tag {
+  _id: ID
+  name: String
+  description: String
+}
+
 type Location {
   _id: ID
   name: String
   latitude: Float
   longitude: Float
   description: String
+  tags: [Tag]
 }
 
 type Auth {
@@ -19,10 +26,16 @@ type Auth {
   user: User
 }
 
+type Tag {
+  _id: ID!
+  name: String!
+}
+
 type Mutation {
   createUser(username: String!, email: String!, password: String!): Auth
   loginUser(email: String!, password: String!): Auth
   updateUser(username: String, email: String, password: String): User
+  addTag(name: String!, description: String, icon: String): Tag
   addLocation(
     name: String!
     latitude: Float!
@@ -38,6 +51,7 @@ type Query {
   users: [User]
   getLocations(id: ID!): Location
   locations: [Location]
+  getTags: [Tag]
 }
 `;
 

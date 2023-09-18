@@ -1,35 +1,29 @@
 import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { useQuery } from '@apollo/client';
-import { QUERY_LOCATIONS } from '../utils/queries';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-const Map = () => {
-  const { loading, error, data } = useQuery(QUERY_LOCATIONS);
-
+const Map = ({ onClick }) => {
   useEffect(() => {
-    if (!loading && !error) {
-      const spots = data.locations;
-      const mapboxApiKey = import.meta.env.VITE_MAPBOX_API_KEY;
+    const mapboxApiKey = import.meta.env.VITE_MAPBOX_API_KEY;
+    mapboxgl.accessToken = mapboxApiKey;
+    const map = new mapboxgl.Map({
+      container: 'mapContainer',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-74.5, 40],
+      zoom: 9,
+    });
 
-      mapboxgl.accessToken = mapboxApiKey;
-      const map = new mapboxgl.Map({
-        container: 'mapContainer',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-74.5, 40],
-        zoom: 9,
-      });
+    map.on('click', onClick);
 
-      spots.forEach((spot) => {
-        new mapboxgl.Marker()
-          .setLngLat([spot.longitude, spot.latitude])
-          .addTo(map);
-      });
-    }
-  }, [loading, error, data]);
+    return () => {
+      map.remove();
+    };
+  }, [onClick]);
 
   return (
     <div id="mapContainer" style={{ width: '100%', height: '400px' }}></div>
   );
 };
+
 
 export default Map;

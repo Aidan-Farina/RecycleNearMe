@@ -1,4 +1,4 @@
-const { User } = require('../models'); // Import your User model
+const { User, Tag} = require('../models'); // Import your User model
 const { signToken, createAuthenticationError } = require('../utils/auth'); // Import your signToken function and authentication error creator
 
 const resolvers = {
@@ -23,6 +23,11 @@ const resolvers = {
         throw new Error('User not found');
       }
       return user;
+    },
+    getTags: async () => {
+      const tags = await Tag.find({});
+      console.log("Tags from DB:", tags);
+      return tags;
     },
     getLocations: async (parent, args) => {
       try {
@@ -103,12 +108,21 @@ const resolvers = {
       }
       throw createAuthenticationError();
     },
-    addLocation: async (parent, args, context) => {
-      const location = new Location(args);
+    addTag: async (_, args) => {
+      const tag = new Tag(args);
+      await tag.save();
+      return tag;
+    },
+    addLocation: async (_, args) => {
+      const { tags, ...rest } = args;
+      const location = new Location(rest);
+      if (tags) {
+        location.tags = tags;
+      }
       await location.save();
       return location;
-    }
-  },
+    },
+  }
 };
 
 module.exports = resolvers;

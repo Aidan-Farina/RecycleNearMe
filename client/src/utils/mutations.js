@@ -30,3 +30,11 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_LOCATION = gql`
+mutation AddLocation($name: String!, $latitude: Float!, $longitude: Float!, $tags: [ID]) {
+  addLocation(name: $name, latitude: $latitude, longitude: $longitude, tags: $tags) {
+    _id
+  }
+}
+`;

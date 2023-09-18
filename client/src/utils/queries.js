@@ -43,3 +43,12 @@ query GetLocations($name: String, $skip: Int, $limit: Int, $sortBy: LocationSort
 }
 `
 
+
+export const GET_TAGS = gql`
+  query getTags {
+    getTags {
+      _id
+      name
+    }
+  }
+`;

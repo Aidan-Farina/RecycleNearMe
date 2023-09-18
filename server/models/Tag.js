@@ -6,9 +6,6 @@ const tagSchema = new Schema({
     required: true,
     unique: true,
   },
-  description: {
-    type: String,
-  },
 });
 
 const Tag = model('Tag', tagSchema);

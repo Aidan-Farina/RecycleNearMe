@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile.jsx";
 import Error from "./pages/error/index.jsx";
-import AddLocation from "./pages/AddLocation.jsx";
+import AddLocation from "./pages/addlocation/AddLocation.jsx";
 
 const router = createBrowserRouter([
   {
